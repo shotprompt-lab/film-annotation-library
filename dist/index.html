@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta name="theme-color" content="#101116">
+<title>影视术语标注台</title>
+<link rel="stylesheet" href="./base.css">
+<link rel="stylesheet" href="./library.css">
+<script defer src="./xlsx.js"></script>
+<script defer src="./pool.js"></script>
+<script defer src="./app.js"></script>
+</head>
+<body>
+<header class="top"><div class="shell"><div class="brand"><span class="brand-icon" aria-hidden="true">▶</span>影视参考台</div>
+<div class="buttons"><a class="action" href="./影视术语与标注.md" download>下载完整词表</a><button id="openPool">关键词池</button></div></div></header>
+<main class="shell">
+<section class="hero"><div><div class="eyebrow" lang="en">FILM ANNOTATION LIBRARY</div><h1>影视术语标注台</h1>
+<p>按制作环节查术语，取用生成提示词，对照成片核验。</p></div>
+<section class="preset"><h2>常见术语对照</h2><div class="buttons" id="quickPairs"></div></section></section>
+<nav id="sections" class="sections" aria-label="工作表"></nav>
+<div class="workspace">
+<nav class="categories" id="categories" aria-label="分类导航"></nav>
+<section class="results" aria-label="检索结果">
+<div class="toolbar"><div class="search"><span class="search-mark" aria-hidden="true">⌕</span><input type="search" id="search" aria-label="搜索当前工作表" placeholder="搜索术语、英文、含义或提示词"></div>
+<select id="evidence" aria-label="按核验材料筛选"></select></div>
+<div class="filters2"><p class="count" aria-live="polite" id="count"></p><button id="reset" hidden>清空筛选</button></div>
+<div class="cards" id="cards"></div><button id="more" class="more" hidden>显示更多</button></section>
+</div></main>
+<aside class="tray" id="tray" aria-label="待对比术语" hidden><div class="shell"><strong id="trayCount"></strong><div id="trayItems" class="tray-items"></div><button id="clearCompare">清空</button><button id="openCompare" class="primary">并排对比</button></div></aside>
+<dialog id="dialog" aria-labelledby="dialogTitle"><div class="dialog-head"><h2 id="dialogTitle"></h2><button id="closeDialog">关闭</button></div><div id="dialogBody" class="dialog-body"></div></dialog>
+  <dialog id="poolDialog" aria-labelledby="poolTitle">
+    <div class="dialog-head"><h2 id="poolTitle">关键词池</h2><button type="button" id="closePool">关闭</button></div>
+    <div class="dialog-body">
+      <div class="pool-projects">
+        <label>当前项目池 <select id="poolSelect"></select></label>
+        <button id="createPool" type="button">新建项目池</button>
+        <button id="renamePool" type="button">重命名</button>
+      </div>
+      <form id="poolEditor" class="pool-editor" hidden>
+        <label id="poolNameLabel" for="poolName">项目池名称</label>
+        <input id="poolName" maxlength="64" autocomplete="off" required aria-describedby="poolNameError">
+        <p id="poolNameError" class="pool-error" role="alert" hidden></p>
+        <div class="buttons">
+          <button type="submit" class="primary" id="savePoolName">保存</button>
+          <button type="button" id="cancelPoolName">取消</button>
+        </div>
+      </form>
+      <div id="poolCount" class="dialog-notice" aria-live="polite"></div>
+      <div class="buttons pool-actions">
+        <button id="exportPoolMarkdown" type="button" class="primary">导出 Markdown</button>
+        <button id="exportPoolExcel" type="button">导出 Excel</button>
+      </div>
+      <div id="poolList" class="pool-groups"></div>
+    </div>
+  </dialog>
+
+<div id="toast" role="status" class="toast" hidden></div>
+<noscript>请启用 JavaScript，或下载完整词表阅读。</noscript>
+</body></html>
